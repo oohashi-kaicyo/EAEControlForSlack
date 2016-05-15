@@ -114,7 +114,6 @@ didStartMonitoringForRegion:(CLRegion *)region
             }
         } break;
         default: {
-            LOG(@"break");
         } break;
     }
 }
