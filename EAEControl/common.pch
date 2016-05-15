@@ -1,0 +1,35 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#endif
+
+#ifdef DEBUG
+#define LOG(...) NSLog(__VA_ARGS__)
+#define FUNC() NSLog(@"%s", __func__)
+
+#else
+#define LOG(...)
+#define FUNC()
+#endif
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_IPAD   (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define RGB(r, g, b, v) [UIColor colorWithRed: (r) / 255.0 green: (g) / 255.0 blue: (b) / 255.0 alpha: 1.0]
+#define SCREEN_W [[UIScreen mainScreen] bounds].size.width
+#define SCREEN_H [[UIScreen mainScreen] bounds].size.height
+
+#define ITOSTR(integer)  [NSString stringWithFormat:@"%d",  integer]
+#define LITOSTR(integer) [NSString stringWithFormat:@"%ld", integer]
+
+#define ORIENTATION [[UIDevice currentDevice] orientation]
