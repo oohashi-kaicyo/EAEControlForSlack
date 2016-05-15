@@ -11,7 +11,7 @@
 
 @implementation Observer
 {
-
+    
 }
 
 static Observer* sharedAppData = nil;
@@ -114,6 +114,7 @@ didStartMonitoringForRegion:(CLRegion *)region
             }
         } break;
         default: {
+            LOG(@"break");
         } break;
     }
 }
@@ -194,7 +195,8 @@ didStartMonitoringForRegion:(CLRegion *)region
 -(void)postSlackAPIWithMessage:(NSString *)message
 {
     FUNC();
-    NSString *slackApiKey = @"xoxp-3597322341-3757063470-4037665806-e90b6c";
+    // please your slack api token here...
+    NSString *slackApiKey = @"xoxp-XXXXXXXXXX-XXXXXXXXXX-XXXXXXXXXXX-XXXXXXXXXX";
     NSDateFormatter *outputFormatter = [NSDateFormatter new];
     [outputFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
     NSString *strNow = [outputFormatter stringFromDate:[NSDate date]];
@@ -209,9 +211,10 @@ didStartMonitoringForRegion:(CLRegion *)region
                                                                                  (CFStringRef)@"!*'();:@&=+$,/?%#[]",
                                                                                  kCFStringEncodingUTF8
                                                                                  )
-    );
+                                         );
     NSString *url;
-    url = [NSString stringWithFormat:@"https://slack.com/api/chat.postMessage?token=%@&channel=C040JP5E5&text=%@&as_user=true", slackApiKey, text];
+    // please your channel id here...
+    url = [NSString stringWithFormat:@"https://slack.com/api/chat.postMessage?token=%@&channel=XXXXXXXX&text=%@&as_user=true", slackApiKey, text];
     LOG(@"%@", url);
     [self httpGetSessionWithURL:url];
 }
@@ -223,8 +226,8 @@ didStartMonitoringForRegion:(CLRegion *)region
     NSURLSessionConfiguration* configuration
     = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:identifier];
     NSURLSession* session = [NSURLSession sessionWithConfiguration:configuration
-                                  delegate:self
-                             delegateQueue:nil];
+                                                          delegate:self
+                                                     delegateQueue:nil];
     NSURL* requestURL = [NSURL URLWithString:url];
     NSURLSessionDownloadTask* task = [session downloadTaskWithURL:requestURL];
     [task resume];
@@ -238,7 +241,7 @@ didStartMonitoringForRegion:(CLRegion *)region
 }
 
 - (void)URLSession:(NSURLSession *)session
-             downloadTask:(NSURLSessionDownloadTask *)downloadTask
+      downloadTask:(NSURLSessionDownloadTask *)downloadTask
 didFinishDownloadingToURL:(NSURL *)location
 {
     FUNC();
@@ -251,7 +254,7 @@ didFinishDownloadingToURL:(NSURL *)location
 }
 
 - (void)URLSession:(NSURLSession *)session
-                task:(NSURLSessionTask *)task
+              task:(NSURLSessionTask *)task
 didCompleteWithError:(NSError *)error
 {
     FUNC();
