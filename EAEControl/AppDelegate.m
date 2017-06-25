@@ -42,7 +42,6 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -57,7 +56,6 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-
 }
 
 - (void)application:(UIApplication *)application
@@ -68,5 +66,4 @@ performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))comp
     [observer startMonitoringRegion];
     completionHandler(UIBackgroundFetchResultNewData);
 }
-
 @end

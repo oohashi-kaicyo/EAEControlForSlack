@@ -32,5 +32,4 @@ static AppData* sharedAppData = nil;
     self.userData = [UserData new];
     return self;
 }
-
 @end

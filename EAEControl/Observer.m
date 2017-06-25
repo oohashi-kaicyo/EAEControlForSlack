@@ -11,7 +11,6 @@
 
 @implementation Observer
 {
-    
 }
 
 static Observer* sharedAppData = nil;
@@ -113,9 +112,8 @@ didStartMonitoringForRegion:(CLRegion *)region
                 [self occupancyTimeCalculation];
             }
         } break;
-        default: {
-            LOG(@"break");
-        } break;
+        default:
+        break;
     }
 }
 
@@ -164,7 +162,6 @@ didStartMonitoringForRegion:(CLRegion *)region
     NSString *beforeState = [[NSUserDefaults standardUserDefaults] objectForKey:@"beforeState"];
     if (message && ([beforeState isEqual:@"enter"])) {
         message = [message stringByAppendingString:@"が研究室から退室しました"];
-        // message = [message stringByAppendingString:[self occupancyTimeCalculation]];
         [self postSlackAPIWithMessage:message];
         [[NSUserDefaults standardUserDefaults] setObject:@"exit" forKey:@"beforeState"];
         [self occupancyTimeCalculation];
@@ -195,7 +192,6 @@ didStartMonitoringForRegion:(CLRegion *)region
 -(void)postSlackAPIWithMessage:(NSString *)message
 {
     FUNC();
-    // please your slack api token here...
     NSString *slackApiKey = @"xoxp-XXXXXXXXXX-XXXXXXXXXX-XXXXXXXXXXX-XXXXXXXXXX";
     NSDateFormatter *outputFormatter = [NSDateFormatter new];
     [outputFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
@@ -203,7 +199,6 @@ didStartMonitoringForRegion:(CLRegion *)region
     message = [message stringByAppendingFormat:@"(%@)", strNow];
     
     NSString *text = message;
-    LOG(@"%@", text);
     text = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
                                                                                  NULL,
                                                                                  (CFStringRef)text,
@@ -215,7 +210,6 @@ didStartMonitoringForRegion:(CLRegion *)region
     NSString *url;
     // please your channel id here...
     url = [NSString stringWithFormat:@"https://slack.com/api/chat.postMessage?token=%@&channel=XXXXXXXX&text=%@&as_user=true", slackApiKey, text];
-    LOG(@"%@", url);
     [self httpGetSessionWithURL:url];
 }
 
@@ -259,7 +253,6 @@ didCompleteWithError:(NSError *)error
 {
     FUNC();
     if (error == nil) {
-        LOG(@"Downloading is succeeded");
     } else {
         LOG(@"Downloading is failed: %@", error);
     }
